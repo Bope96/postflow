@@ -1,14 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutGrid,
   Settings,
   Share2,
   Users,
   ChevronRight,
+  LogOut,
 } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 const NAV = [
   { href: '/canvas', label: 'Canvas', icon: LayoutGrid },
@@ -19,6 +21,14 @@ const NAV = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/login')
+    router.refresh()
+  }
 
   return (
     <aside className="w-56 flex-shrink-0 flex flex-col h-full"
@@ -59,13 +69,20 @@ export function Sidebar() {
       {/* Footer */}
       <div className="px-4 py-4 border-t border-slate-800">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold">
+          <div className="w-7 h-7 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
             S
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-white text-xs font-medium truncate">Shehan</p>
             <p className="text-slate-500 text-xs truncate">Admin</p>
           </div>
+          <button
+            onClick={handleLogout}
+            className="text-slate-500 hover:text-red-400 transition-colors"
+            title="Sign out"
+          >
+            <LogOut size={14} />
+          </button>
         </div>
       </div>
     </aside>
