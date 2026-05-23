@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https://*.tiktok.com https://*.tiktokcdn.com https://*.cdninstagram.com https://*.fbcdn.net https://*.ytimg.com https://i.ytimg.com",
               "frame-src 'self' https://*.tiktok.com https://www.youtube.com https://www.instagram.com https://www.facebook.com",
-              "connect-src 'self' https://*.tiktok.com https://*.tiktokcdn.com https://*.youtube.com https://*.instagram.com",
+              "connect-src 'self' https://*.tiktok.com https://*.tiktokcdn.com https://*.youtube.com https://*.instagram.com https://*.supabase.co wss://*.supabase.co",
               "media-src 'self' blob: https://*.tiktok.com https://*.tiktokcdn.com",
             ].join('; '),
           },
